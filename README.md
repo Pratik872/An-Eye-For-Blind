@@ -1,98 +1,116 @@
-# An Eye For Blind
+# An Eye For Blind Using Deep Learning with Attention Mechanism
 
-To test the deployed model click [here](https://flight-fare-deploy.herokuapp.com/).<br/>
+To test the deployed model click [here](https://eye-for-blind.herokuapp.com/).<br/>
 Note : It takes some time to load the heroku page. Patience is the key!!
 
 ## Overview
-- The dataset consists of records for different airlines,travel routes,stops,sources,destination,date of journeyprice,etc.Price is the target variable.This dataset is present on kaggle.Please check [here](https://www.kaggle.com/nikhilmittal/flight-fare-prediction-mh/) for more details on dataset. 
+- This is Flickr8k dataset which consists of around 8k images with 5 captions per image.Please check [here](https://www.kaggle.com/adityajn105/flickr8k) for more details on dataset. 
 
-- The train dataset has about 10682 records. The test dataset is a different file and you will have to test on that. 
+- The train dataset has about 8k images. There is a seperate captions.txt file for captions. 
 
 ## Motivation
-- I like to travel a lot. So for this purpose I thought it would be better if try to analyse this data and make a model out of it just for academic purpose.
+- The World Health Organization (WHO) has reported that approximately 285 million people are visually impaired worldwide, and out of these 285 million, 39 million are completely blind. It gets extremely tough for them to carry out daily activities, one of which is reading. From reading a newspaper or a magazine to reading an important text message from your bank, it is tough for them to read the text written in it.
 
-- As I am a traveller, I found this project interesting as I would analyse how different features affect the flight prices.
+- A similar problem they also face is seeing and enjoying the beauty of pictures and images. Today, in the world of social media, millions of images are uploaded daily. Some of them are about your friends and family, while some of them are about nature and its beauty. Understanding what is present in that image is quite a challenge for certain people who are suffering from visual impairment or who are blind.
 
--  This model would give you approximate fare value and not the exact!
+-  We will learn how to make a model, specifically such that a blind person knows the contents of an image in front of them with the help of a CNN-RNN based model
 
 ## Project Structure
-- [main.py](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/main.py) : This file has the flask application which is created.
+- [main.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/main.py) : This file has the flask application which is created.
 
-- [utils.py](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/utils.py) : This file has all the helper functions which are required to run the application.
+- [utils.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/utils.py) : This file has all the helper functions which are required to run the application.
 
-- [constants.py](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/constants.py) : This file has all the constant variables required in developing the application.
+- [constants.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/constants.py) : This file has all the constant variables required in developing the application.
 
-- [templates](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/templates) : This folder has all the templates which are rendered in the application
+- [templates](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/templates) : This folder has all the templates which are rendered in the application
 
-- [readme_resources](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources) : This folder has all the images used to create readme file.
+- [readme_resources](https://github.com/Pratik872/An-Eye-For-Blind/tree/main/readme%20resources) : This folder has all the images used to create readme file.
 
-- [requirements.txt](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/requirements.txt) : This file has all the packages used to code and build the application.
+- [requirements.txt](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/requirements.txt) : This file has all the packages used to code and build the application.
 
-- [Flight Fare Prediction.ipynb](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/Flight%20Fare%20Prediction.ipynb) : This jupyter notebook has the code for making models.
+- [Eye for Blind.ipynb](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/Eye_for_blind_Pratik_Waghmare.ipynb) : This jupyter notebook has the code for making models.
 
 ## Problem Objective
-- To build a model which predict the prices of flight using a dataset
+- To create a deep learning model which can explain the contents of an image in the form of speech through caption generation with an attention mechanism on Flickr8K dataset. This kind of model is a use-case for blind people so that they can understand any image with the help of speech. The caption generated through a CNN-RNN model will be converted to speech using a text to speech library. 
+
+- The deployed model at Heroku will just show the captions. If you want to hear the audio for the generated caption then clone this project in local system and use the commented code in the 'main.py' and 'utils.py'. You will find the instructions to run this project in your system below in [How to Use]() section.
 
 ## Methodology
 
-### EDA (Exploratory Data Analysis)
-- I have plotted various graphs to visualize the data. Some of them are as follows : 
+### Data Understanding
+- I have used glob package to see the images. Some of them are as follows : 
 
-![PriceVsAirline](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/AirlineVsPrice.png)
-![PriceVsDest](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/DestinationVsPrice.png)
-![PriceVsSource](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/SourceVsPrice.png)
-![PriceVsStops](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/StopsVsPrice.png)
+![SampleImgsWithCaps](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/readme%20resources/ImgsCaptions.png)
 
-- Required Graphs are plotted using seaborn,matplotlib libraries.
 
-- Also heatmap is plotted for checking the corelation between target and predictor variables.
-![Heatmap](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/heatmap.png)
+### Preprocessing the Captions
+- Necessary preprocessing steps were done to process the captions.
 
-### Feature Engineering
-- I have derived many useful features from existing features so that I can use them in my model. You can check the notebook attached.
+- Used Keras tokeniser to transform top 5000 words which were then used in the RNN
 
-- I have handled categorical variables i.e nominal ar well as ordinal by using one-hot-encoding and label encoding whereever necessary.
+- Padding was done to max_length of sentences to feed the RNN. Masking was also used so that model could understand the padded input to neglect them.
 
-### Feature Selection
-- I have used ExtraTreesRegressor for checking feature importances.
+- Please find the necessary graphs/images below
 
-- I have also used barplot for visualising them:
-![Feature_Imp](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/readme_resources/feature%20importances.png)
+![Top30Words](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/readme%20resources/top30words.png)
+
+![WordCloud](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/readme%20resources/wordcloudpng.png)
+
+
+### Preprocessing the Images
+- I have used Transfer Learning using InceptionV3 Object detection model to find important features from the image and then feed in to Encoder i.e a CNN model. So to preprocess images for InceptionV3 I have used tensorflow and keras. Please find some preprocessed images below.
+
+![preprocessedimgs](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/readme%20resources/samplepreprocessedimages.png)
+
+### Dataset Creation
+- I have used 'from_tensor_slices' method of tensorflow to create a dataset.
+
+- Necessary batch size was chosen
+
+- Also train-test split was used to split training and testing data to avoid data leakage.
 
 ### Model Making
 
-- I have built a RandomForestRegressor model with default hyperparameters initially.
+- Necessary constants were chosen which are mentioned in [constants.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/constants.py). These were chosen according to system computational power.
 
-- I chose this model just because I thought ensemble model would work better. But you can try different models too.
+- As attention mechanism is not present in the keras, I have used sub-classing using keras to create encoder,attention and decoder models. You can find the detailed code in [Eye for Blind.ipynb](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/Eye_for_blind_Pratik_Waghmare.ipynb).
 
-### Hyper-Parameter Tuning
+### Model Evaluation
 
-- I have tuned the hyperparameters 'n_estimators', 'max_depth', 'max_features' by using RandomisedSearchCV. I used  this because this works faster than GridSearchCV.
+- I have tried using both Greedy Search and Beam search for predicting captions.
 
-- I again built a RF model with best hyper-parameters selected from CV.
+- To evaluate the predicted caption I have used BLEU score. BLEU score is basically an evaluation metric used for evaluating the actual and predicted sentences. Greater the score more good is the prediction.
 
-### Metrics
-
-- I have used 'r2_score' as my metric here. You can use any different metric for regression.
-
-- Further I have plotted and checked error terms also to check whether they are normally distributed around 0.
 
 ### DATA SOURCE
-- [Flight Fare Dataset](https://www.kaggle.com/nikhilmittal/flight-fare-prediction-mh/)
+- [Flickr8k](https://www.kaggle.com/adityajn105/flickr8k)
 
 ### Notebook
-- [Flight Fare Predictor](https://github.com/Pratik872/ML/blob/main/E2E%20Project/FlightFarePredictor/Flight%20Fare%20Prediction.ipynb)
+- [Eye for Blind.ipynb](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/Eye_for_blind_Pratik_Waghmare.ipynb)
 
 ### Built with 🛠️
-- Packages/Repo : Pandas,Numpy,Seaborn,Matplotlib,Sklearn,Flask,Pickle,Git
+- Packages/Repo : Pandas,Numpy,Seaborn,Matplotlib,Sklearn,Flask,Pickle,Git,Tensorflow,Keras,Glob,Pillow,NLTK
 
 - Dataset : Kaggle
 
-- Coded on : Jupter Notebook (modelling), VSCode(building application)
+- Coded on : Jupter Notebook and Google colab (modelling), VSCode(building application)
 
 ### Deployment
 - Deployed using Heroku(PAAS)
 
-- For deployment repository click [here](https://github.com/Pratik872/ML/tree/deployFlight)
+- For deployment repository click [here](https://github.com/Pratik872/An-Eye-For-Blind/tree/deploy)
 
-- For Web Application click [here](https://flight-fare-deploy.herokuapp.com/)
+- For Web Application click [here](https://eye-for-blind.herokuapp.com/)
+
+### How to Use
+
+#### In Local system with captions Audio (Anaconda/Miniconda needed):
+- Clone this repository in your system.
+- Create a new environment in Anaconda.
+- Activate new environment and run [requirements.txt](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/requirements.txt) using 'pip install -r requirements.txt' (Note: Anaconda Terminal should be opened in project cloned directory where all project files are present)
+- Uncomment the code for audio in 'main.py' and 'utils.py' files.
+- Run [main.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/main.py) using 'python main.py' in terminal and VOILA!!!
+
+
+#### Using Docker:
+To be added soon!!
