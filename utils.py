@@ -3,7 +3,6 @@ from tensorflow.python.keras.models import Model
 from keras.preprocessing.text import Tokenizer
 import numpy as np
 from gtts import gTTS
-from IPython import display
 from keras.preprocessing import image
 import pickle
 import playsound
@@ -122,7 +121,6 @@ def ReturnCaption(caption):
     speech = gTTS(pred_caption, lang = 'en', slow = False) 
     speech.save('voice.mp3')
     audio_file = 'voice.mp3'
-    display.display(display.Audio(audio_file, rate=None))
     
     return pred_caption,audio_file
 
