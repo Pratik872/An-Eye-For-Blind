@@ -1,5 +1,5 @@
 # An Eye For Blind Deployment Branch
-This is a repository for deploying Eye For Blind project in Heroku Cloud. You will find the code in [main](https://github.com/Pratik872/ML/tree/main/E2E%20Project/FlightFarePredictor) branch.
+This is a repository for deploying Eye For Blind project in Heroku Cloud. You will find the code in [main](https://github.com/Pratik872/An-Eye-For-Blind/tree/main) branch.
 
 This project is deployed at heroku. Check [here](https://flight-fare-deploy.herokuapp.com/)
 
