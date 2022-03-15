@@ -24,14 +24,7 @@ playsound==1.2.2
 pytz
 scikit-learn
 scipy
-tensorflow-gpu==2.8.0
-tensorboard==2.8.0
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.1
-tensorflow-io-gcs-filesystem==0.24.0
-tf-estimator-nightly==2.8.0.dev2021122109
-threadpoolctl==3.1.0
-typing_extensions==4.1.1
+tensorflow
 urllib3==1.26.8
 webencodings==0.5.1
 Werkzeug==2.0.3
