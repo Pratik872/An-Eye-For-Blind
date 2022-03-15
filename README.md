@@ -13,7 +13,7 @@ Note : It takes some time to load the heroku page. Patience is the key!!
 
 - A similar problem they also face is seeing and enjoying the beauty of pictures and images. Today, in the world of social media, millions of images are uploaded daily. Some of them are about your friends and family, while some of them are about nature and its beauty. Understanding what is present in that image is quite a challenge for certain people who are suffering from visual impairment or who are blind.
 
--  We will learn how to make a model, specifically such that a blind person knows the contents of an image in front of them with the help of a CNN-RNN based model
+-  We will learn how to make a model, specifically such that a blind person knows the contents of an image in front of them with the help of a CNN-Attention-RNN based model
 
 ## Project Structure
 - [main.py](https://github.com/Pratik872/An-Eye-For-Blind/blob/main/main.py) : This file has the flask application which is created.
@@ -33,7 +33,7 @@ Note : It takes some time to load the heroku page. Patience is the key!!
 ## Problem Objective
 - To create a deep learning model which can explain the contents of an image in the form of speech through caption generation with an attention mechanism on Flickr8K dataset. This kind of model is a use-case for blind people so that they can understand any image with the help of speech. The caption generated through a CNN-RNN model will be converted to speech using a text to speech library. 
 
-- The deployed model at Heroku will just show the captions. If you want to hear the audio for the generated caption then clone this project in local system and use the commented code in the 'main.py' and 'utils.py'. You will find the instructions to run this project in your system below in [How to Use]() section.
+- The deployed model at Heroku will just show the captions. If you want to hear the audio for the generated caption then clone this project in local system and use the commented code in the 'main.py' and 'utils.py'. You will find the instructions to run this project in your system below in 'How to Use' section at last.
 
 ## Methodology
 
