@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+
+<p><b>Disclaimer : </b>This web application is created just for academic purpose. It is just created for learning end-to-end flow of Deep Learning models. <br/>
+    <i><b>So please do not use this application for real time purposes as this model is trained with limited data.</b></i></p>
+
+<h4>An end-to-end Deep Learning with Attention based model project, built with Flask, deployed at Heroku..</h4>
+
+<p><b>Note : </b>It takes time to predict caption. Kindly have patience. The caption would not be exact always as model is trained with limited data.</p>
+<p>If application crashes please load it again.Sorry for the inconvenience caused.</p>
+
+<form action="\predict" method="post", enctype="multipart/form-data">
+<p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+<p><label for="file" style="cursor: pointer;"><b><i>Click here to upload Image..</i></b></label></p>
+<p><img id="output" width="300" /></p>
+
+<input type="submit" value="Predict Caption" class="btn btn-secondary">
+
+</form>
+
+<script>
+	var loadFile = function(event) {
+		var image = document.getElementById('output');
+		image.src = URL.createObjectURL(event.target.files[0]);
+	};
+</script>
+
+<h5>{{ prediction_text }}</h5>
+
+
+{% endblock %}
