@@ -30,8 +30,8 @@ def predict():
         extracted_features_V3 = ExtractFeaturesV3(processed_image)
         extracted_features_encoder = ExtractFeaturesEncoder(extracted_features_V3)
         predicted_caption = PredictCaptionDecoder(extracted_features_encoder)
-        pred_caption,aud_file = ReturnCaption(predicted_caption)
-        SpeakOutCaption(aud_file)
+        pred_caption = ReturnCaption(predicted_caption)
+        # SpeakOutCaption(aud_file)
 
     return render_template('home.html', prediction_text = pred_caption)
 

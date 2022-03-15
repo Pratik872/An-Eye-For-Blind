@@ -5,7 +5,6 @@ import numpy as np
 from gtts import gTTS
 from keras.preprocessing import image
 import pickle
-import playsound
 
 from constants import *
 
@@ -118,14 +117,14 @@ def PredictCaptionDecoder(feature_vector):
 def ReturnCaption(caption):
     pred_caption=' '.join(caption).rsplit(' ', 1)[0]
 
-    speech = gTTS(pred_caption, lang = 'en', slow = False) 
-    speech.save('voice.mp3')
-    audio_file = 'voice.mp3'
+    # speech = gTTS(pred_caption, lang = 'en', slow = False) 
+    # speech.save('voice.mp3')
+    # audio_file = 'voice.mp3'
     
-    return pred_caption,audio_file
+    return pred_caption
 
-def SpeakOutCaption(file):
-    playsound.playsound(file)
+# def SpeakOutCaption(file):
+#     playsound.playsound(file)
 
 
 

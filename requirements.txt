@@ -12,7 +12,6 @@ itsdangerous
 kiwisolver
 matplotlib
 mistune
-playsound==1.2.2
 pytz
 tensorflow-cpu
 urllib3==1.26.8
